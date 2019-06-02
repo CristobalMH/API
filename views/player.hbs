@@ -1,0 +1,22 @@
+<script type="text/javascript">
+  let playerList = document.createElement('ul');
+
+  const myHeaders = new Headers();
+  myHeaders.append('authorization', `Bearer ${ localStorage.token }`)
+
+  fetch('/api/player',{
+    method: 'GET',
+    headers: myHeaders
+  })
+  .then(res => res.json())
+  .then(data => {
+    data.players.map(player =>{
+    let text = document.createTextNode(player.name);
+    let elem = document.createElement('li')
+    elem.appendChild(text);
+    playerList.appendChild(elem);
+    })
+    document.body.appendChild(playerList);
+  })
+
+</script>

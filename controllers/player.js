@@ -15,10 +15,10 @@ function getPlayer (req, res) {
 
 function getPlayers (req, res) {
   Player.find({}, (err, players) => {
-    if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
-    if (!player) return res.status(404).send({message: 'No existen players'})
+    if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`});
+    if (!players) return res.status(404).send({message: 'No existen players'})
 
-    res.send(200, { players })
+    res.status(200).send({ players })
   })
 }
 
@@ -26,12 +26,12 @@ function savePlayer (req, res) {
   console.log('POST /api/player')
   console.log(req.body)
 
-  let palyer = new Player()
+  let player = new Player()
   player.name = req.body.name
-  player.picture = req.body.picture
-  player.price = req.body.price
-  player.category = req.body.category
-  player.description = req.body.description
+  player.role = req.body.role
+  player.trophies = req.body.trophies
+  player.clan = req.body.clan
+  player.cards = req.body.cards
 
   player.save((err, playerStored) => {
     if (err) res.status(500).send({message: `Error al salvar en la base de datos: ${err} `})
@@ -40,7 +40,7 @@ function savePlayer (req, res) {
   })
 }
 
-function updatePplayer (req, res) {
+function updatePlayer (req, res) {
   let playerId = req.params.playerId
   let update = req.body
 
@@ -65,9 +65,9 @@ function deletePlayer (req, res) {
 }
 
 module.exports = {
-  getPlayer|,
   getPlayer,
+  getPlayers,
   savePlayer,
   updatePlayer,
-  deleteplayer
+  deletePlayer
 }

@@ -10,7 +10,7 @@ const api = express.Router();
 api.get('/player', playerCtrls.getPlayers);
 
 //GET (obtenemos el id de un player)
-api.get('/player/:playerId', playerCtrls.getPlayerId);
+api.get('/player/:playerId', playerCtrls.getPlayer);
 
 //POST (Declaramos a un player)
 api.post('/player', playerCtrls.savePlayer
